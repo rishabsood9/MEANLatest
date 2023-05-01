@@ -9,6 +9,7 @@ import { StudentService } from '../shared/student.service';
   styleUrls: ['./student.component.css']
 })
 export class StudentComponent implements OnInit {
+  Gender=["Male","Female","Trans","Others"]
   studentForm! : FormGroup;
   showModal:boolean = false;
   editMode:boolean = false;
@@ -25,10 +26,10 @@ export class StudentComponent implements OnInit {
 
     this.studentForm = this.fb.group({
       _id: [''],
-      name: ['Alex Johnson', Validators.required],
-      gender: ['Full Stack Developer', Validators.required],
-      city: ['United States', Validators.required],
-      pincode: [200000, Validators.required]
+      name: ['', Validators.required],
+      gender: ['', Validators.required],
+      city: ['', Validators.required],
+      pincode: ['', Validators.required]
     })
   }
 
