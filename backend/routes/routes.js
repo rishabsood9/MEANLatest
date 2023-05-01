@@ -14,6 +14,11 @@ router.get('/', (req, res)=> {
     Student.find( (err, doc) =>{
         if(err){
             console.log('Error in Get Data'+err)
+            res.status(500).json({
+                message:'error occured',
+                err,
+                code:'500'
+            })
         }else{
             res.send(doc);
         }
@@ -26,6 +31,11 @@ router.get('/:id', (req, res)=> {
         Student.findById(req.params.id, (err, doc) =>{
             if(err){
                 console.log('Error in Get Student by id '+ err)
+                res.status(500).json({
+                    message:'Error in Get Student by id',
+                    err,
+                    code:'500'
+                })
             }else{
                 res.send(doc);
             }
@@ -47,6 +57,11 @@ router.post('/', (req, res)=> {
     emp.save( (err, doc)=>{
         if(err){
             console.log('Error in Post Data'+err)
+            res.status(500).json({
+                message:'Error in Post Data',
+                err,
+                code:'500'
+            })
         }else{
             res.send(doc);
         }
@@ -68,6 +83,11 @@ router.put('/:id', (req, res)=> {
         Student.findByIdAndUpdate(req.params.id, {$set :emp}, {new:true}, (err, doc) =>{
             if(err){
                 console.log('Error in Update Student by id '+ err)
+                res.status(500).json({
+                    message:'Error in Update Student by id ',
+                    err,
+                    code:'500'
+                })
             }else{
                 res.send(doc);
             }
@@ -84,6 +104,11 @@ router.delete('/:id', (req, res)=> {
         Student.findByIdAndRemove(req.params.id, (err, doc) =>{
             if(err){
                 console.log('Error in Delete Student by id '+ err)
+                res.status(500).json({
+                    message:'Error in Delete Student by id ',
+                    err,
+                    code:'500'
+                })
             }else{
                 res.send(doc);
             }
