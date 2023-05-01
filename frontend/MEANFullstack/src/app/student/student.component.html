@@ -1,0 +1,83 @@
+<div class="container py-3">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Student Management</h2>
+        </div>
+            
+        <div class="col ml-auto text-right">
+            <button type="button" class="btn btn-outline-success"
+            (click)="onAddStudent()">
+                <i class="fa fa-plus"></i> Add Student
+            </button>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-md-4" *ngFor="let item of students">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{item.name}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{item.gender}}</h6>
+                    <p class="card-text border-top pt-2 mt-3">
+                        City: <strong>{{item.city}}</strong>
+                        <br>
+                        Pincode: <strong>{{item.pincode}}</strong>
+                    </p>
+                    <button type="button" class="btn btn-outline-primary mr-2"
+                        (click)="onEditStudent(item)">Edit</button>
+                    <button type="button" class="btn btn-outline-danger"
+                        (click)="onDeleteStudent(item._id)">Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade show" [class.show]="showModal">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Add Student</h5>
+            <button (click)="onCloseModal()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        
+        <form [formGroup]="studentForm" (ngSubmit)="onEmpSubmit()"> 
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Enter Name</label>
+                    <input type="text" class="form-control" formControlName="name">
+                    <small *ngIf="!studentForm?.get('name')?.valid && studentForm?.get('name')?.touched" class="form-text text-danger">Please Enter Name.</small>
+                </div>
+                
+                <div class="form-group">
+                    <label>Enter gender</label>
+                    <input type="text" class="form-control" formControlName="gender">
+                    <small *ngIf="!studentForm?.get('gender')?.valid && studentForm?.get('gender')?.touched" class="form-text text-danger">Please Enter gender.</small>
+                </div>
+                
+                <div class="form-group">
+                    <label>Enter City</label>
+                    <input type="text" class="form-control" formControlName="city">
+                    <small *ngIf="!studentForm?.get('city')?.valid && studentForm?.get('city')?.touched" class="form-text text-danger">Please Enter city.</small>
+                </div>
+                
+                <div class="form-group">
+                    <label>Enter Pincode</label>
+                    <input type="text" class="form-control" formControlName="pincode">
+                    <small *ngIf="!studentForm?.get('pincode')?.valid && studentForm?.get('pincode')?.touched" class="form-text text-danger">Please Enter pincode.</small>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="onCloseModal()" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
